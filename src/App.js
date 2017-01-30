@@ -6,6 +6,7 @@ import './App.css';
 class App extends Component {
   constructor() {
     super();
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       messages: null, 
     };
@@ -33,7 +34,11 @@ class App extends Component {
       .catch(error => {
         console.log(error);
       });
-  }  
+  }
+  
+  handleClick(e) {
+    console.log('parent', e.target);
+  }
   
   render() {
     let renderItems = null;
@@ -41,7 +46,7 @@ class App extends Component {
     
     if (messages) {
       renderItems = messages.map((message, index) => {
-        return <Item key={index} text={message}/>;
+        return <Item key={index} text={message} onClick={this.handleClick}/>;
       });
     }
     
