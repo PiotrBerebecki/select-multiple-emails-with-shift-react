@@ -16,14 +16,13 @@ class Item extends Component {
   }
     
   handleClick(e) {
-    const { target } = e;
-    
-    if (target.nodeName === 'INPUT') {
+    if (e.target.nodeName === 'INPUT') {
       this.props.onClick(e);
     }
   }
   
   render() {
+    
     return (
       
       <div className="item">
@@ -32,6 +31,7 @@ class Item extends Component {
             type="checkbox"
             checked={this.props.isChecked}
             onChange={() => {}}
+            id={this.props.id}
           />
          </label>
          <p>{this.props.text}</p>
