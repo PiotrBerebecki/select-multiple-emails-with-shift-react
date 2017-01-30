@@ -8,32 +8,48 @@ class App extends Component {
     super();
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      messages: null, 
+      items: null, 
     };
   }
   
   componentDidMount() {
-    const messages = [
-      'This is an inbox layout',
-      'Check one item',
-      'Hold down your Shift key',
-      'Check a lower item',
-      'Everything in-between should also be set to checked / unchecked'
+    const items = [
+      { text: 'This is an inbox layout', isChecked: false },
+      { text: 'Check one item', isChecked: false },
+      { text: 'Hold down your Shift key', isChecked: false },
+      { text: 'Check a lower item', isChecked: false },
+      { text: 'Items should be checked', isChecked: false }
     ];
     
     axios.get('https://jsonplaceholder.typicode.com/users')
       .then(response => {
-        const users = response.data.map(user => user.email);
+        const newItems = response.data.map(user => {
+          return {
+            text: user.email,
+            isChecked: false
+          };
+        });
+        
         this.setState({
-          messages: [
-            ...messages,
-            ...users
+          items: [
+            ...items,
+            ...newItems
           ]
         });
       })
       .catch(error => {
         console.log(error);
       });
+      
+    
+    // setTimeout(() => {
+    //   this.setState({
+    //     items: [
+    //       { text: 'This is an inbox layout', isChecked: false },
+    //       { text: 'Check one item', isChecked: true }
+    //     ]
+    //   });
+    // }, 2000);
   }
   
   handleClick(e) {
@@ -42,11 +58,16 @@ class App extends Component {
   
   render() {
     let renderItems = null;
-    const { messages } = this.state;
+    const { items } = this.state;
     
-    if (messages) {
-      renderItems = messages.map((message, index) => {
-        return <Item key={index} text={message} onClick={this.handleClick}/>;
+    if (items) {
+      renderItems = items.map((item, index) => {
+        return <Item 
+                 key={index} 
+                 text={item.text} 
+                 onClick={this.handleClick}
+                 isChecked={item.isChecked}
+               />;
       });
     }
     

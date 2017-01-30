@@ -9,11 +9,17 @@ class Item extends Component {
     };
   }
   
+  componentDidMount() {
+    this.setState({
+      isChecked: this.props.isChecked
+    });
+  }
+    
   handleClick(e) {
     const { target } = e;
     
     if (target.nodeName === 'INPUT') {
-      console.log('child', target);
+      this.props.onClick(e);
     }
   }
   
@@ -24,7 +30,8 @@ class Item extends Component {
          <label onClick={this.handleClick}>
           <input
             type="checkbox"
-            checked={this.state.isChecked}
+            checked={this.props.isChecked}
+            onChange={() => {}}
           />
          </label>
          <p>{this.props.text}</p>
