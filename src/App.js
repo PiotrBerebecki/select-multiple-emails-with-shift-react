@@ -1,19 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Item from './Item';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      messages: [
+        'This is an inbox layout',
+        'Check one item',
+        'Hold down your Shift key',
+        'Check a lower item',
+        'Everything in-between should also be set to checked / unchecked'
+      ]
+    };
+  }
+  
   render() {
+    
+    const renderItems = this.state.messages.map((message, index) => {
+      return <Item key={index} text={message}/>;
+    });
+    
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      
+      <div className="inbox">
+          
+          { renderItems }
+          
       </div>
+    
     );
   }
 }
