@@ -47,23 +47,47 @@ class App extends Component {
       });
   }
   
-  handleClick(e) {
-    const { target } = e;
+  handleClick(event) {
+    const { target, shiftKey } = event;
     const itemIndex = Number(target.id);
     const { items } = this.state;
     const isCurrentChecked = !items[itemIndex].isChecked;
-        
+            
     this.setState({
       items: [
         ...items.slice(0, itemIndex),
-        Object.assign({}, items[itemIndex], {isChecked: isCurrentChecked}),
+        {...items[itemIndex], isChecked: isCurrentChecked},
         ...items.slice(itemIndex + 1)
       ],
       indexOfCurrentCheckbox: itemIndex
+    }, () => {
+      this.processShift(shiftKey, itemIndex, isCurrentChecked);
+      this.setState({
+        indexOfPreviousCheckbox: itemIndex
+      });
     });
   }
   
+  processShift(shiftKey, itemIndex, isCurrentChecked) {
+    if (shiftKey && this.state.indexOfPreviousCheckbox !== null) {
+      let min = Math.min(this.state.indexOfPreviousCheckbox, itemIndex);
+      let max = Math.max(this.state.indexOfPreviousCheckbox, itemIndex);
+      
+      const updatedItems = this.state.items.map((item, index) => {
+        if (index >= min && index <= max && index !== itemIndex) {
+          return {...item, isChecked: isCurrentChecked};
+        }
+        return item;
+      });
+      
+      this.setState({
+        items: updatedItems
+      });
+    }
+  }
+  
   render() {
+    // console.log('render');
     let renderItems = null;
     const { items } = this.state;
     

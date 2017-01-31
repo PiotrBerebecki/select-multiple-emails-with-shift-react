@@ -14,15 +14,19 @@ class Item extends Component {
       isChecked: this.props.isChecked
     });
   }
+  
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.isChecked !== this.props.isChecked;
+  }
     
   handleClick(e) {
-    if (e.target.nodeName === 'INPUT') {
+    if (e.target.nodeName === 'INPUT') {      
       this.props.onClick(e);
     }
   }
   
   render() {
-    
+    console.log('render child');
     return (
       
       <div className="item">
