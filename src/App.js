@@ -88,7 +88,6 @@ class App extends Component {
   }
   
   render() {
-    console.log('render parent');
     let renderItems = null;
     const { items } = this.state;
     
