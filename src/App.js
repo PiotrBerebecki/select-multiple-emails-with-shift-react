@@ -16,29 +16,26 @@ class App extends Component {
   
   componentDidMount() {
     const items = [
-      { text: '0 This is an inbox layout', isChecked: false },
-      { text: '1 Check one item', isChecked: false },
-      { text: '2 Hold down your Shift key', isChecked: false },
-      { text: '3 Check a lower item', isChecked: false },
-      { text: '4 Items should be checked', isChecked: false }
-    ];
-    
-    const newItemsTest = [
+      { text: 'This is an inbox layout', isChecked: false },
+      { text: 'Check one item', isChecked: false },
+      { text: 'Hold down your Shift key', isChecked: false },
+      { text: 'Check a lower item', isChecked: false },
+      { text: 'Items should be checked', isChecked: false }
     ];
     
     axios.get('https://jsonplaceholder.typicode.com/users')
       .then(response => {
-        // const newItems = response.data.map(user => {
-        //   return {
-        //     text: user.email,
-        //     isChecked: false
-        //   };
-        // });
+        const newItems = response.data.map(user => {
+          return {
+            text: user.email,
+            isChecked: false
+          };
+        });
         
         this.setState({
           items: [
             ...items,
-            ...newItemsTest
+            ...newItems
           ]
         });
       })
