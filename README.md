@@ -1,6 +1,6 @@
 ### Live version: https://select-multiple-emails.herokuapp.com/
 
-<img src="./src/graphics/screencast.gif" widht="275px" height="auto">
+<img src="./src/graphics/screencast.gif" width="275px" height="auto">
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
