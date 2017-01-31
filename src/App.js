@@ -47,6 +47,10 @@ class App extends Component {
       });
   }
   
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.indexOfCurrentCheckbox === this.state.indexOfCurrentCheckbox;
+  }
+  
   handleClick(event) {
     const { target, shiftKey } = event;
     const itemIndex = Number(target.id);
@@ -87,7 +91,7 @@ class App extends Component {
   }
   
   render() {
-    // console.log('render');
+    console.log('render parent');
     let renderItems = null;
     const { items } = this.state;
     

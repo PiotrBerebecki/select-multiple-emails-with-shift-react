@@ -26,7 +26,6 @@ class Item extends Component {
   }
   
   render() {
-    console.log('render child');
     return (
       
       <div className="item">
